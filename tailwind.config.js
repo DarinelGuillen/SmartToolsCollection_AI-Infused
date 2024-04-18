@@ -1,14 +1,12 @@
-export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,jsx,ts,tsx,vue}",
-  ],
+module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'gaoel': ['Gaoel', 'sans-serif'],  
+        'gaoel': ['Gaoel', 'sans-serif'],
+        'b-bold': ['BreymontB', 'sans-serif'],
+        'b-light': ['BreymontL', 'sans-serif']
       }
-    },
+    }
   },
   plugins: [],
 }

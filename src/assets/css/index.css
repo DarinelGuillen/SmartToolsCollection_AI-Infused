@@ -26,15 +26,9 @@
     font-style: normal;
 }
 @font-face {
-  font-family: 'Gaoel';
-  src: url('../fonts/gaoel.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Gaoel';
-  src: url('../fonts/gaoel.ttf') format('truetype');
-  font-weight: normal;
+  font-family: 'BreymontB';
+  src: url('../fonts/BreymontB.ttf') format('truetype');
+  font-weight: bold;
   font-style: normal;
 }
 
@@ -52,5 +46,30 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
-  font-family: 'Gaoel', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Gaoel',  sans-serif;
 }
+h2 {
+  font-size: 2em;
+  color: blue;
+  line-height: 1.1;
+  font-family: 'BreymontB', sans-serif;
+}
+.NUM {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.NUML {
+  font-family: "Lato", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+p{
+  font-size: 1em;
+  color: rgb(255, 255, 255);
+  line-height: 1.1;
+  font-family: 'Lato', sans-serif;
+}
+
