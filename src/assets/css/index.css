@@ -10,7 +10,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #000000;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -31,45 +31,23 @@
   font-weight: bold;
   font-style: normal;
 }
+@font-face {
+  font-family: 'BreymontL';
+  src: url('../fonts/BreymontL.ttf') format('truetype');
+  font-weight: 100;
+  font-style: italic;
+}
 
 
 /* Estilos base para el body */
 body {
+  /* background: linear-gradient(135deg, #0F172A 0%, #1E3A8A 50%, #647ACB 100%); */
+  background: #040404;
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
+  padding: 0;
+  /* display: flex;
+  place-items: center; */
   min-height: 100vh;
-}
-
-/* Estilo específico para h1, considera si quieres añadir la fuente aquí también */
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-  font-family: 'Gaoel',  sans-serif;
-}
-h2 {
-  font-size: 2em;
-  color: blue;
-  line-height: 1.1;
-  font-family: 'BreymontB', sans-serif;
-}
-.NUM {
-  font-family: "Lato", sans-serif;
-  font-weight: 400;
-  font-style: italic;
-}
-
-.NUML {
-  font-family: "Lato", sans-serif;
-  font-weight: 100;
-  font-style: normal;
-}
-
-p{
-  font-size: 1em;
-  color: rgb(255, 255, 255);
-  line-height: 1.1;
-  font-family: 'Lato', sans-serif;
+  min-width: 100vw;
 }
 

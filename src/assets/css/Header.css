@@ -1,0 +1,27 @@
+/* Header.css */
+.header-gradient {
+  background: linear-gradient(90deg, rgba(137, 196, 244, 1) 0%, rgba(255, 255, 255, 1) 100%);
+}
+
+.shape-blue {
+  box-shadow: -5px -5px 10px #ccebff, 5px 5px 15px #79a6cc;
+  background: radial-gradient(circle at 35% 25%, #8cc9f0, #5390d9);
+}
+
+.shape-gray {
+  box-shadow: inset -4px -4px 8px #b8b8b8, inset 4px 4px 12px #ffffff;
+  background: radial-gradient(circle at 35% 25%, #e0e0e0, #c0c0c0);
+}
+
+.shape-transparent {
+  box-shadow: -5px -5px 10px #ccebff, 5px 5px 15px #79a6cc;
+  background: transparent;
+  border: 2px solid #a1a1a1;
+}
+
+.shape-yellow {
+  box-shadow: -5px -5px 10px #ffecd2, 5px 5px 15px #cc8e35;
+  background: radial-gradient(circle at 35% 25%, #f0e6d2, #d9c0a3);
+}
+
+/* Importar este archivo en tu componente de React */

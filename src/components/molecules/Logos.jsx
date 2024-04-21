@@ -5,7 +5,7 @@ import tailwindinLogo from '../../assets/tailwind.svg';
 function Logos() {
   return (
 
-    <div className="flex space-x-7">
+    <div className="flex-wrap space-x-7">
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="w-20 h-20" alt="Vite logo" />
         </a>
