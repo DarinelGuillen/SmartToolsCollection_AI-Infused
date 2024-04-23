@@ -40,14 +40,19 @@
 
 
 /* Estilos base para el body */
+/* Estilos base para el body */
+/* Estilos base para el body */
 body {
   /* background: linear-gradient(135deg, #0F172A 0%, #1E3A8A 50%, #647ACB 100%); */
   background: #040404;
+  /* background-image: url('../img/body.png');
+  background-repeat: no-repeat;
+  background-size: cover; */
+
   margin: 0;
   padding: 0;
   /* display: flex;
   place-items: center; */
-  min-height: 100vh;
   min-width: 100vw;
+  min-height: 100vh;
 }
-
