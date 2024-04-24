@@ -11,7 +11,7 @@ This project involves developing a static web page that incorporates several min
 The project will include the following mini-applications:
 
 - **Calculator**: Allows basic mathematical operations.
-- **Stopwatch**: Features functionalities to start, stop, and reset time measurements.
+- **Tabata**: Features functionalities to start, stop, and reset time measurements.
 - **Unit Converter**: Capable of converting between different units of measure (length, mass, temperature).
 - **To-Do List**: A tool for managing daily tasks.
 - **Digital Clock**: Displays the current time in various time zones.
