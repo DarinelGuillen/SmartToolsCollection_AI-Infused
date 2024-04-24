@@ -83,6 +83,8 @@ function MRigth() {
       </AnimatePresence>
     </>
   );
+  );
 }
 
 export default MRigth;
+

@@ -8,6 +8,8 @@ function MLeft() {
       <div className=" rounded-2xl  w-full h-[33.33%] md:h-[70%] lg:h-[80%]">
         <MLCenter/>
         {/* <MLBottomR/> */}
+        <MLCenter/>
+        {/* <MLBottomR/> */}
 
       </div>
       <div className="flex flex-col gap-y-5  justify-around   md:min-h-[30%]  lg:min-h-[20%]  md:gap-4 lg:flex-row lg:gap-5 xl:gap-[3rem]  w-full md:h-grow "> {/* Wrapper with responsive gap and direction */}
