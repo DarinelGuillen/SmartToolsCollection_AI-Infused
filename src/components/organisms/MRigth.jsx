@@ -1,34 +1,61 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import MRCalendar from '../molecules/MRCalendar';
-import MRTabata from '../molecules/MRTabata';
-import MRMemoryGame from '../molecules/MRMemoryGame';
-import MRCalculator from '../molecules/MRCalculator';
-import MRClock from '../molecules/MRClock';
-import MRColorGenerator from '../molecules/MRColorGenerator';
-import MRToDoList from '../molecules/MRToDoList';
-import MRTic_Tac_Toe from '../molecules/MRTic_Tac_Toe';
-import MRUnitConverter from '../molecules/MRUnitConverter';
 
-
+// Mapping components to their respective modules for dynamic import
+const componentsInfo = {
+    'MRCalendar': { path: '../molecules/MRCalendar' },
+    'MRTabata': { path: '../molecules/MRTabata' },
+    'MRMemoryGame': { path: '../molecules/MRMemoryGame' },
+    'MRCalculator': { path: '../molecules/MRCalculator' },
+    'MRClock': { path: '../molecules/MRClock' },
+    'MRColorGenerator': { path: '../molecules/MRColorGenerator' },
+    'MRToDoList': { path: '../molecules/MRToDoList' },
+    'MRTic_Tac_Toe': { path: '../molecules/MRTic_Tac_Toe' },
+    'MRUnitConverter': { path: '../molecules/MRUnitConverter' }
+};
 
 function MRigth() {
-  const [selectedId, setSelectedId] = useState(null);
-  const [selectedItem, setSelectedItem] = useState({ subtitle: '', title: '' });
+  const [selectedComponent, setSelectedComponent] = useState(null);
+  const [loadedComponents, setLoadedComponents] = useState({});
 
-  // Configuramos explícitamente las clases de altura para cada artículo en cada columna
-  const columnHeights = [
-    ['flex-grow', 'h-[10rem]', 'h-[37%]'],  // Columna 1: grow, 10rem, 37%
-    ['h-[37%]', 'flex-grow', 'h-[10rem]'],  // Columna 2: 37%, grow, 10rem
-    ['flex-grow', 'h-[10rem]', 'h-[37%]'],  // Columna 3: grow, 10rem, 37%
+  useEffect(() => {
+    // Dynamically import all components at once on mount
+    const loadAllComponents = async () => {
+      const imports = Object.entries(componentsInfo).map(async ([name, info]) => {
+        const { default: Component } = await import(`${info.path}`);
+        return { name, Component };
+      });
+      const loaded = await Promise.all(imports);
+      const componentsMap = loaded.reduce((acc, { name, Component }) => {
+        acc[name] = Component;
+        return acc;
+      }, {});
+      setLoadedComponents(componentsMap);
+    };
+    loadAllComponents();
+  }, []);
+  const columnComponents = [
+    ['MRTabata', 'MRMemoryGame', 'MRCalculator'], // Column 1
+    ['MRTic_Tac_Toe', 'MRToDoList', 'MRColorGenerator'], // Column 2
+    ['MRClock', 'MRUnitConverter', 'MRCalendar'] // Column 3
   ];
 
-  const handleSelectItem = (articleIndex, subtitle, title) => {
-    setSelectedId(`item-${articleIndex}`);
-    setSelectedItem({ subtitle, title });
+  const columnHeights = [
+    ['flex-grow', 'h-[10rem]', 'h-[37%]'], // Column 1
+    ['h-[37%]', 'flex-grow', 'h-[10rem]'], // Column 2
+    ['flex-grow', 'h-[10rem]', 'h-[37%]']  // Column 3
+  ];
+
+  const handleSelectItem = async (componentName) => {
+    if (loadedComponents[componentName]) {
+      setSelectedComponent(React.createElement(loadedComponents[componentName]));
+    }
   };
 
-  // Configuración de la transición
+  const handleClose = () => {
+    setSelectedComponent(null); // Function to close the modal
+  };
+
   const transition = {
     type: "spring",
     stiffness: 120,
@@ -42,49 +69,55 @@ function MRigth() {
 
   return (
     <>
-      <main className="flex w-full h-full gap-6">
-        {columnHeights.map((heights, sectionIndex) => (
-          <section key={sectionIndex} className="flex flex-col flex-1 h-full gap-y-6">
-            {heights.map((heightClass, articleIndex) => {
-              const subtitle = `Subtitle ${sectionIndex}-${articleIndex}`;
-              const title = `Title ${sectionIndex}-${articleIndex}`;
-              return (
-                <motion.article
-                  key={articleIndex}
-                  className={`border bg-gray-800 rounded-3xl ${heightClass}`}
-                  onClick={() => handleSelectItem(`${sectionIndex}-${articleIndex}`, subtitle, title)}
-                  transition={transition}
-                >
-                  <motion.h5>{subtitle}</motion.h5>
-                  <motion.h2>{title}</motion.h2>
-                </motion.article>
-              );
-            })}
+      <main className="flex w-full h-full gap-6 flex-col md:flex-row lg:flex-row xl:flex-row">
+        {columnComponents.map((components, sectionIndex) => (
+          <section key={sectionIndex} className="flex flex-col  md:flex-col lg:flex-col flex-1 h-auto gap-y-6">
+            {components.map((componentName, index) => (
+              <motion.article
+                key={index}
+                className={` ${columnHeights[sectionIndex][index]}`}
+                onClick={() => handleSelectItem(componentName)}
+                transition={transition}
+              >
+                {loadedComponents[componentName] ? React.createElement(loadedComponents[componentName]) :
+                <div className="border border-blue-300 shadow three-d-effect rounded-3xl p-5 max-w-sm w-full mx-auto h-full">
+                <div className="animate-pulse flex flex-col h-full">
+                  <div className="bg-black rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-30   rounded-xl w-full h-[60%]"></div>
+                  <div className="flex-1 py-4">
+                    <div className="h-9  bg-black rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-30   rounded-xl w-[80%] mx-auto"></div>
+                  </div>
+                </div>
+              </div>
+
+
+                }
+              </motion.article>
+            ))}
           </section>
         ))}
       </main>
 
       <AnimatePresence>
-        {selectedId && (
+        {selectedComponent && (
           <motion.div
-            className="fixed inset-0 z-10 flex items-center justify-center p-4 bg-blue-700 border rounded-lg"
+            className="fixed inset-0 z-10 flex items-center justify-center p-6 bg-blue-700 border rounded-lg"
             initial="hidden"
             animate="visible"
             exit="hidden"
             variants={backdropVariants}
             transition={transition}
-            onClick={() => setSelectedId(null)}
+            onClick={(e) => e.stopPropagation()} // Prevents click from propagating to the backdrop
           >
-            <motion.h5>{selectedItem.subtitle}</motion.h5>
-            <motion.h2>{selectedItem.title}</motion.h2>
-            <motion.button className="mt-4">Close</motion.button>
+            <button onClick={handleClose} className="absolute skew-y-6 h-10 w-10 flex top-3 right-3 text-white hover:backdrop-blur-3xl hover:bg-opacity-30 font-bold py-2 px-2 rounded-full font-BB
+             bg-gray-400  bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border
+            ">X</button>
+
+            {selectedComponent}
           </motion.div>
         )}
       </AnimatePresence>
     </>
   );
-  );
 }
 
 export default MRigth;
-
